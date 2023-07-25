@@ -1,5 +1,21 @@
 
 
+/*const rockBtn = document.querySelector('#rockBtn');
+rockBtn.addEventListener('click', () => {
+  alert("Hello WorldROCK");
+});
+
+const paperBtn = document.querySelector('#paperBtn');
+paperBtn.addEventListener('click', () => {
+  alert("Hello WorldPAPER");
+});
+
+const scissorsBtn = document.querySelector('#scissorsBtn');
+scissorsBtn.addEventListener('click', () => {
+  alert("Hello WorldSCISSORS");
+});*/
+
+
 // get computer choice
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3 + 1);
@@ -83,5 +99,8 @@ function game() {
         console.log("It's a tie!");
     }
 }
+
+
+
 
 game();
