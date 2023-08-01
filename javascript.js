@@ -1,4 +1,7 @@
 
+let computerScore = 0;
+let playerScore = 0;
+
 // event listener
 const rockBtn = document.querySelector('#rockBtn');
 rockBtn.addEventListener('click', () => {
@@ -16,8 +19,6 @@ scissorsBtn.addEventListener('click', () => {
     playRound("scissors");
 
 });
-
-
 
 // get computer choice
 function getComputerChoice() {
@@ -50,56 +51,56 @@ function game(playerSelection, computerSelection) {
     if ((playerSelection === "rock" && computerSelection === "rock") ||
         (playerSelection === "paper" && computerSelection === "paper") ||
         (playerSelection === "scissors" && computerSelection === "scissors")) {
-        console.log(`Computer's selection is: ${computerSelection}`);
-        console.log("This round is a tie.");
+
+        const result = document.getElementById('result');
+        result.innerText = `Computer\'s selection is: ${computerSelection} \n The round ends in a tie.`;
         return (0);
     }
     if ((playerSelection === "rock" && computerSelection === "paper") ||
         (playerSelection === "paper" && computerSelection === "scissors") ||
         (playerSelection === "scissors" && computerSelection === "rock")) {
-        console.log(`Computer's selection is: ${computerSelection}`);
-        console.log("You lose the round.");
+
+        const result = document.getElementById('result');
+        result.innerText = `Computer\'s selection is: ${computerSelection} \n You lose the round.`;
         return (1);
     }
     if ((playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "paper" && computerSelection === "rock") ||
         (playerSelection === "scissors" && computerSelection === "paper")) {
-        console.log(`Computer's selection is: ${computerSelection}`);
-        console.log("You win the round.");
+
+        const result = document.getElementById('result');
+        result.innerText = `Computer\'s selection is: ${computerSelection} \n You win the round.`;
         return (2);
     }
 }
 
 //calls playRound and begins score tracking
 function playRound(choice) {
-    let computerScore = 0;
-    let playerScore = 0;
-    let gameResult = 0;
+    gameResult = game(choice, getComputerChoice());
 
-    //for (let i = 0; i < 5; i++) {
-        // get user input
-        //const input = prompt("What is your selection?");
-        //console.log(`Your selection is ${input}`);
+    const score = document.getElementById('score');
+    if (gameResult === 1) {
+        computerScore++;
+    } else if (gameResult === 2) {
+        playerScore++;
+    }
+    score.innerHTML = `Your Score: ${playerScore}, Computer's Score: ${computerScore}`;
 
-        gameResult = game(choice, getComputerChoice());
-
-        if (gameResult === 0) {
-            console.log(`Your Score: ${playerScore}, Computer's Score: ${computerScore}`)
-        } else if (gameResult === 1) {
-            computerScore++;
-            console.log(`Your Score: ${playerScore}, Computer's Score: ${computerScore}`)
-        } else if (gameResult === 2) {
-            playerScore++;
-            console.log(`Your Score: ${playerScore}, Computer's Score: ${computerScore}`)
-        }
-    //}
-
-    // determine game winner
-    if (playerScore > computerScore) {
-        console.log("Congrats, you win!");
-    } else if (playerScore < computerScore) {
-        console.log("Sorry, you lose!");
-    } else if (playerScore === computerScore) {
-        console.log("It's a tie!");
+    if (computerScore === 5 ) {
+        score.innerHTML = `The game is over, the computer wins with a score of ${computerScore}!`;
+    } else if (playerScore === 5) {
+        score.innerHTML = `The game is over, you win with a score of ${playerScore}!`;
     }
 }
+
+/*function endGame(){
+    rockBtn.remove();
+    paperBtn.remove();
+    scissorsBtn.remove();
+    result.innerText = '';
+    score.innerText = '';
+
+    const prompt = document.createElement('div');
+    const playAgainPromot = prompt.innerText = 'Do you want to play again?';
+}*/
+
